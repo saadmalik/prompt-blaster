@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prompt Blaster</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --bg-color: #ffffff;
+      --text-color: #374151;
+      --border-color: #e5e7eb;
+      --success-color: #10b981;
+      --error-color: #ef4444;
+      --service-bg: #f3f4f6;
+      --service-bg-checked: #e0e7ff;
+    }
+
+    body {
+      width: 400px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 5px 0;
+      color: var(--text-color);
+      font-weight: 600;
+      margin-bottom:20px;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      resize: vertical;
+      font-size: 14px;
+      line-height: 1.5;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      box-sizing: border-box;
+    }
+    
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--service-bg);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .service-item:hover {
+      background: var(--service-bg-checked);
+    }
+
+    /* Custom checkbox styling */
+    .service-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      margin: 0;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .service-item input[type="checkbox"]:checked {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .service-item input[type="checkbox"]::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      transform: scale(0);
+      transition: transform 0.2s ease;
+      box-shadow: inset 1em 1em white;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+    
+    .service-item input[type="checkbox"]:checked::before {
+      transform: scale(1);
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    button:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    button:disabled {
+      background-color: #d1d5db;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .status {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      background-color: var(--service-bg);
+      transition: all 0.3s ease;
+    }
+    
+    .status-item.success {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--success-color);
+      border-left: 3px solid var(--success-color);
+    }
+    
+    .status-item.error {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--error-color);
+      border-left: 3px solid var(--error-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <h1>Prompt Blaster</h1>
+      <textarea id="promptInput" placeholder="Enter your prompt here..."></textarea>
+    </div>
+    
+    <div>
+      <div class="section-title">Send to:</div>
+      <div class="services" id="serviceList">
+        <!-- Services will be populated by JavaScript -->
+      </div>
+    </div>
+    
+    <button id="blastButton">Blast Prompt</button>
+    <div id="status" class="status"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 

@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Prompt Blaster",
+  "version": "0.1.0",
+  "description": "Send one prompt to ChatGPT, Claude, Perplexity, and Grok in parallel.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["tabs", "scripting", "storage", "activeTab"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://claude.ai/*",
+    "https://perplexity.ai/*",
+    "https://grok.com/*"
+  ],
+  "action": { 
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon48.png"
+  },
+  "background": { 
+    "service_worker": "sw.js",
+    "type": "module"
+  },
+  "options_page": "options.html",
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "Open Prompt Blaster"
+    }
+  }
+} 
